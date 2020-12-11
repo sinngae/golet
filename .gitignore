@@ -1,0 +1,9 @@
+# OS
+
+# IDE/Lang
+.idea*
+go.sum
+
+# mid-obj
+
+# log
