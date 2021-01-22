@@ -2,11 +2,10 @@ package goerrcode
 
 import (
 	"fmt"
-
-	"github.com/pkg/errors"
+	"github.com/sinngae/goerrcode/internal"
 )
 
-func WithRetCode(err error, retCode int32) error {
+func WithRetCode(err error, retCode int) error {
 	if err == nil {
 		return nil
 	}
@@ -18,35 +17,35 @@ func WithRetCode(err error, retCode int32) error {
 
 type withRetCode struct {
 	cause   error
-	retCode int32
+	retCode int
 }
 
 func (rc *withRetCode) Error() string {
 	if rc.cause == nil {
 		return fmt.Sprintf("retcode:%d", rc.retCode)
 	}
-	return fmt.Sprintf("retcode:%d, err:%s", rc.retCode, rc.cause.Error())
+	return fmt.Sprintf("retcode[%d] err[%s]", rc.retCode, rc.cause.Error())
 }
 
-func (rc *withRetCode) RetCode() int32 {
+func (rc *withRetCode) RetCode() int {
 	return rc.retCode
 }
 
-func RetCode(err error) int32 {
+func (rc *withRetCode) Cause() error {
+	return rc.cause
+}
+
+func RetCode(err error) int {
 	if err == nil {
 		return RetCodeSuccess
 	}
-
-	type retCode interface {
-		RetCode() int32
-	}
 	for err != nil {
-		code, ok := err.(retCode)
+		code, ok := err.(internal.RetCoder)
 		if ok {
 			return code.RetCode()
 		}
-		err = errors.Cause(err)
+		err = Cause(err)
 	}
 
-	return RetCodeUnknownError
+	return RetCodeUnknown
 }

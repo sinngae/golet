@@ -3,14 +3,12 @@ package goerrcode
 import (
 	"fmt"
 	"testing"
-
-	"github.com/pkg/errors"
 )
 
 func TestRetCode_Error(t *testing.T) {
 	type fields struct {
 		cause   error
-		retCode int32
+		retCode int
 	}
 	tests := []struct {
 		name   string
@@ -29,7 +27,7 @@ func TestRetCode_Error(t *testing.T) {
 		{
 			name: "test case 1: cause!=nil",
 			fields: fields{
-				cause:   errors.New("test"),
+				cause:   fmt.Errorf("test"),
 				retCode: 123,
 			},
 			want: "retcode:123, err:test",
@@ -51,12 +49,12 @@ func TestRetCode_Error(t *testing.T) {
 func TestRetCode_RetCode(t *testing.T) {
 	type fields struct {
 		cause   error
-		retCode int32
+		retCode int
 	}
 	tests := []struct {
 		name   string
 		fields fields
-		want   int32
+		want   int
 	}{
 		// TODO: Add test cases.
 		{
@@ -84,7 +82,7 @@ func TestRetCode_RetCode(t *testing.T) {
 func TestWithRetCode(t *testing.T) {
 	type args struct {
 		err     error
-		retCode int32
+		retCode int
 	}
 	tests := []struct {
 		name    string
@@ -95,7 +93,7 @@ func TestWithRetCode(t *testing.T) {
 		{
 			name: "test case 0",
 			args: args{
-				err:     errors.New("test"),
+				err:     fmt.Errorf("test"),
 				retCode: 123,
 			},
 			wantErr: true,
@@ -112,9 +110,9 @@ func TestWithRetCode(t *testing.T) {
 
 // usage
 func TestRetCode(t *testing.T) {
-	err := WithRetCode(errors.New("test"), 123)
+	err := WithRetCode(fmt.Errorf("test"), 123)
 	err = WithRetCode(err, 1234)
-	err = errors.WithMessage(err, "this is a err")
+	err = WithMessage(err, "this is a err")
 	fmt.Println(err)
 	fmt.Println(RetCode(err))
 }
