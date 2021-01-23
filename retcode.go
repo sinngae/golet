@@ -2,6 +2,7 @@ package goerrcode
 
 import (
 	"fmt"
+
 	"github.com/sinngae/goerrcode/internal"
 )
 
@@ -44,6 +45,7 @@ func RetCode(err error) int {
 		if ok {
 			return code.RetCode()
 		}
+
 		err = Cause(err)
 	}
 

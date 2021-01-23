@@ -79,6 +79,7 @@ func RetCodeMsg(err error) *withRetCodeMessage {
 		if ok {
 			return code
 		}
+
 		err = Cause(err)
 	}
 

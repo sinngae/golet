@@ -12,6 +12,7 @@ func main() {
 	err := goerrcode.WithRetCodeMessage(fmt.Errorf("test"), errcode.DBNoData)
 	err = goerrcode.WithStack(err)
 	fmt.Println(err)
-	fmt.Println(goerrcode.Message(err))
-	fmt.Println()
+	msg := goerrcode.Message(err)
+	fmt.Println(msg)
+	fmt.Println("hi")
 }

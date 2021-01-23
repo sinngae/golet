@@ -57,6 +57,7 @@ func Stack(err error) internal.Stacker {
 		if ok {
 			return stack
 		}
+
 		err = Cause(err)
 	}
 
