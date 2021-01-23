@@ -22,10 +22,15 @@ type withMessage struct {
 }
 
 func (msg *withMessage) Error() string {
+	return msg.JsonStr()
+}
+
+func (msg *withMessage) JsonStr() string {
 	if msg.cause == nil {
-		return fmt.Sprintf("message:%s", msg.msg)
+		return fmt.Sprintf("{\"message\":\"%s\"}", msg.msg)
 	}
-	return fmt.Sprintf("message[%s] err[%s]", msg.msg, msg.cause.Error())
+
+	return fmt.Sprintf("{\"message\":\"%s\", \"err\":%s}", msg.msg, JsonStr(msg.cause))
 }
 
 func (msg *withMessage) Message() string {

@@ -22,10 +22,15 @@ type withRetCode struct {
 }
 
 func (rc *withRetCode) Error() string {
+	return rc.JsonStr()
+}
+
+func (rc *withRetCode) JsonStr() string {
 	if rc.cause == nil {
-		return fmt.Sprintf("retcode:%d", rc.retCode)
+		return fmt.Sprintf("{\"retcode\":%d}", rc.retCode)
 	}
-	return fmt.Sprintf("retcode[%d] err[%s]", rc.retCode, rc.cause.Error())
+
+	return fmt.Sprintf("{\"retcode\":%d, \"err\":%s}", rc.retCode, JsonStr(rc.cause))
 }
 
 func (rc *withRetCode) RetCode() int {
