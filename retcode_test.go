@@ -14,3 +14,8 @@ func TestWithRetCode(t *testing.T) {
 func TestRetCode(t *testing.T) {
 	fmt.Println(RetCode(errWithRC))
 }
+
+func TestIs(t *testing.T) {
+	fmt.Println(Is(errWithRC, 404))
+	fmt.Println(Is(errWithRC, 403))
+}

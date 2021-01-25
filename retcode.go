@@ -56,3 +56,21 @@ func RetCode(err error) int {
 
 	return RetCodeUnknown
 }
+
+func Is(err error, retCode int) bool {
+	if err == nil {
+		return retCode == RetCodeSuccess
+	}
+	for err != nil {
+		code, ok := err.(internal.RetCoder)
+		if ok {
+			if retCode == code.RetCode() {
+				return true
+			}
+		}
+
+		err = Cause(err)
+	}
+
+	return false
+}
