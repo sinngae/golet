@@ -2,6 +2,7 @@ package goerrcode
 
 import (
 	"fmt"
+
 	"github.com/sinngae/goerrcode/internal"
 )
 
@@ -10,21 +11,26 @@ func WithMessage(err error, msg string) error {
 		return nil
 	}
 	return &withMessage{
-		cause:   err,
-		msg: msg,
+		cause: err,
+		msg:   msg,
 	}
 }
 
 type withMessage struct {
-	cause   error
-	msg string
+	cause error
+	msg   string
 }
 
 func (msg *withMessage) Error() string {
+	return msg.JsonStr()
+}
+
+func (msg *withMessage) JsonStr() string {
 	if msg.cause == nil {
-		return fmt.Sprintf("message:%s", msg.msg)
+		return fmt.Sprintf("{\"message\":\"%s\"}", msg.msg)
 	}
-	return fmt.Sprintf("message[%s] err[%s]", msg.msg, msg.cause.Error())
+
+	return fmt.Sprintf("{\"message\":\"%s\", \"err\":%s}", msg.msg, JsonStr(msg.cause))
 }
 
 func (msg *withMessage) Message() string {
@@ -44,6 +50,7 @@ func Message(err error) string {
 		if ok {
 			return msg.Message()
 		}
+
 		err = Cause(err)
 	}
 

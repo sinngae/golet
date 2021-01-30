@@ -34,10 +34,14 @@ type withStack struct {
 }
 
 func (st *withStack) Error() string {
+	return st.JsonStr()
+}
+
+func (st *withStack) JsonStr() string {
 	if st.cause == nil {
-		return fmt.Sprintf("stack:%s", st.stack.Content)
+		return fmt.Sprintf("{\"stack\":\"%s\", \"sum\":\"%x\"}", st.stack.Content, st.stack.Sum)
 	}
-	return fmt.Sprintf("stack[\n%s] err[%s]", st.stack.Content, st.cause.Error())
+	return fmt.Sprintf("{\"stack\":\n\"%s\", \"sum\":\"%x\", \"err\":%s}", st.stack.Content, st.stack.Sum, JsonStr(st.cause))
 }
 
 func (st *withStack) Stack() *internal.MyStack {
@@ -48,15 +52,16 @@ func (st *withStack) Cause() error {
 	return st.cause
 }
 
-func Stack(err error) internal.Stacker {
+func Stack(err error) *internal.MyStack {
 	if err == nil {
 		return nil
 	}
 	for err != nil {
 		stack, ok := err.(internal.Stacker)
 		if ok {
-			return stack
+			return stack.Stack()
 		}
+
 		err = Cause(err)
 	}
 

@@ -42,10 +42,14 @@ type withRetCodeMessage struct {
 }
 
 func (rm *withRetCodeMessage) Error() string {
+	return rm.JsonStr()
+}
+
+func (rm *withRetCodeMessage) JsonStr() string {
 	if rm.cause == nil {
-		return fmt.Sprintf("retcode:%d, message:%s", rm.retCode, rm.msg)
+		return fmt.Sprintf("{\"retcode\":%d, \"message\":\"%s\"}", rm.retCode, rm.msg)
 	}
-	return fmt.Sprintf("retcode:%d, message:%s, err:%s", rm.retCode, rm.msg, rm.cause.Error())
+	return fmt.Sprintf("{\"retcode\":%d, \"message\":\"%s\", \"err\":%s}", rm.retCode, rm.msg, JsonStr(rm.cause))
 }
 
 func (rm *withRetCodeMessage) Cause() error {
@@ -77,8 +81,9 @@ func RetCodeMsg(err error) *withRetCodeMessage {
 	for err != nil {
 		code, ok := err.(*withRetCodeMessage)
 		if ok {
-			return code
+			return code.RetCodeMsg()
 		}
+
 		err = Cause(err)
 	}
 

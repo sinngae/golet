@@ -22,9 +22,6 @@ const (
 	RetCodeJWTExpired = 2102
 	//  code 2200 ~ 2299, config error
 	RetCodeConfigNoData = 2200
-	//  code 2300 ~ 2399, cache error
-	RetCodeCacheNoData = 2300
-	RetCodeCacheNoHit  = 2301
 )
 
 var (
@@ -44,7 +41,4 @@ var (
 	JWTExpired = goerrcode.NewRetCodeMsg(RetCodeJWTExpired, "JWT is expired")
 
 	ConfigNoData = goerrcode.NewRetCodeMsg(RetCodeConfigNoData, "config not found")
-
-	CacheNoData = goerrcode.NewRetCodeMsg(RetCodeCacheNoData, "cache namespace not found")
-	CacheNotHit = goerrcode.NewRetCodeMsg(RetCodeCacheNoHit, "cache key not found")
 )

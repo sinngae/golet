@@ -7,11 +7,11 @@ import (
 )
 
 type Stacker interface {
-	Stack() int
+	Stack() *MyStack
 }
 
 type MyStack struct {
-	Sum [16]byte
+	Sum     [16]byte
 	Content []byte
 }
 
