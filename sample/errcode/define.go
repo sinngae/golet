@@ -1,6 +1,6 @@
 package errcode
 
-import "github.com/sinngae/goerrcode"
+import "github.com/sinngae/gland"
 
 const (
 	// code 0 ~ 99
@@ -26,19 +26,19 @@ const (
 
 var (
 	// critical
-	Success = goerrcode.NewRetCodeMsg(RetCodeSuccess, goerrcode.MsgSuccess)
-	Failure = goerrcode.NewRetCodeMsg(RetCodeFailure, goerrcode.MsgFailure)
-	Unknown = goerrcode.NewRetCodeMsg(RetCodeUnknown, goerrcode.MsgUnknown)
+	Success = gland.NewRetCodeMsg(RetCodeSuccess, gland.MsgSuccess)
+	Failure = gland.NewRetCodeMsg(RetCodeFailure, gland.MsgFailure)
+	Unknown = gland.NewRetCodeMsg(RetCodeUnknown, gland.MsgUnknown)
 
-	DBNoData = goerrcode.NewRetCodeMsg(RetCodeNoData, "data not found")
+	DBNoData = gland.NewRetCodeMsg(RetCodeNoData, "data not found")
 
-	NoParam          = goerrcode.NewRetCodeMsg(RetCodeNoParam, "required param not found")
-	ParamInvalid     = goerrcode.NewRetCodeMsg(RetCodeParamInvalid, "param is invalid")
-	ParamParseFailed = goerrcode.NewRetCodeMsg(RetCodeParamParseFailed, "parse param failed")
+	NoParam          = gland.NewRetCodeMsg(RetCodeNoParam, "required param not found")
+	ParamInvalid     = gland.NewRetCodeMsg(RetCodeParamInvalid, "param is invalid")
+	ParamParseFailed = gland.NewRetCodeMsg(RetCodeParamParseFailed, "parse param failed")
 
-	JWTNoData  = goerrcode.NewRetCodeMsg(RetCodeJWTNoData, "JWT not found")
-	JWTInvalid = goerrcode.NewRetCodeMsg(RetCodeJWTInvalid, "JWT is invalid")
-	JWTExpired = goerrcode.NewRetCodeMsg(RetCodeJWTExpired, "JWT is expired")
+	JWTNoData  = gland.NewRetCodeMsg(RetCodeJWTNoData, "JWT not found")
+	JWTInvalid = gland.NewRetCodeMsg(RetCodeJWTInvalid, "JWT is invalid")
+	JWTExpired = gland.NewRetCodeMsg(RetCodeJWTExpired, "JWT is expired")
 
-	ConfigNoData = goerrcode.NewRetCodeMsg(RetCodeConfigNoData, "config not found")
+	ConfigNoData = gland.NewRetCodeMsg(RetCodeConfigNoData, "config not found")
 )
