@@ -1,10 +1,10 @@
-package goerrcode
+package gland
 
 import (
 	"crypto/md5"
 	"fmt"
 
-	"github.com/sinngae/goerrcode/internal"
+	"github.com/sinngae/gland/internal"
 )
 
 func WithStack(err error) error {

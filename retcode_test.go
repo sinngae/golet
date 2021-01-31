@@ -1,4 +1,4 @@
-package goerrcode
+package gland
 
 import (
 	"fmt"

@@ -24,9 +24,9 @@ buf:{{{goroutine 1 [running]:
 runtime/debug.Stack(0xc00007eef0, 0x1037037, 0x1167f80)
         /usr/local/Cellar/go@1.13/1.13.15/libexec/src/runtime/debug/stack.go:24 +0x9d
 main.Example0(0xc00007ef38)
-        /Users/ziqiangren/gitwork/goerrcode/cmd/stack.go:23 +0x26
+        /Users/ziqiangren/gitwork/gland/cmd/stack.go:23 +0x26
 main.main()
-        /Users/ziqiangren/gitwork/goerrcode/cmd/stack.go:15 +0x5a
+        /Users/ziqiangren/gitwork/gland/cmd/stack.go:15 +0x5a
 }}}
 
 */
@@ -39,9 +39,9 @@ func Example0(st *myst) {
 /*
 buf:{{{goroutine 1 [running]:
 main.Example1(0xc00007ef38)
-        /Users/ziqiangren/gitwork/goerrcode/cmd/stack.go:40 +0x6d
+        /Users/ziqiangren/gitwork/gland/cmd/stack.go:40 +0x6d
 main.main()
-        /Users/ziqiangren/gitwork/goerrcode/cmd/stack.go:15 +0x5a
+        /Users/ziqiangren/gitwork/gland/cmd/stack.go:15 +0x5a
 }}}
 
 */
@@ -61,7 +61,7 @@ func Example2(st *myst) {
 
 /*
 caller0:{{{
-/Users/ziqiangren/gitwork/goerrcode/cmd/stack.go:15 (0x109b629)
+/Users/ziqiangren/gitwork/gland/cmd/stack.go:15 (0x109b629)
 /usr/local/Cellar/go@1.13/1.13.15/libexec/src/runtime/proc.go:203 (0x102aec5)
 /usr/local/Cellar/go@1.13/1.13.15/libexec/src/runtime/asm_amd64.s:1357 (0x10533b0)
 }}}

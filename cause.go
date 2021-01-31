@@ -1,6 +1,6 @@
-package goerrcode
+package gland
 
-import "github.com/sinngae/goerrcode/internal"
+import "github.com/sinngae/gland/internal"
 
 func Cause(err error) error {
 	cause, ok := err.(internal.Causer)

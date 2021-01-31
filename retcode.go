@@ -1,9 +1,9 @@
-package goerrcode
+package gland
 
 import (
 	"fmt"
 
-	"github.com/sinngae/goerrcode/internal"
+	"github.com/sinngae/gland/internal"
 )
 
 func WithRetCode(err error, retCode int) error {
