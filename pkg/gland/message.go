@@ -3,7 +3,7 @@ package gland
 import (
 	"fmt"
 
-	"github.com/sinngae/gland/internal"
+	"github.com/sinngae/gland/pkg/gland/internal"
 )
 
 func WithMessage(err error, msg string) error {

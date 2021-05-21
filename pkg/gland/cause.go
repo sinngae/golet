@@ -1,6 +1,6 @@
 package gland
 
-import "github.com/sinngae/gland/internal"
+import "github.com/sinngae/gland/pkg/gland/internal"
 
 func Cause(err error) error {
 	cause, ok := err.(internal.Causer)

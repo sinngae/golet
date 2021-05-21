@@ -10,12 +10,13 @@ go get github.com/sinngae/gland
 ``` 
 
 ## What is Gland
-Gland is an error-handling solution for Go applications. It supports:
-+ error handling
-+ error tracing
-+ return code handling
+Gland is a solution for Go RPC & Web Service common packages. It has:
++ gland
+    + error handling
+    + error tracing
+    + return code handling
 
-Gland want be thought of as a complete API for error handing.
+Gland want to be thought of as rich packages for Go Service utility.
 
 ## Binding error With Values
 ```go
