@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/sinngae/gland/cmd/testcase/errcode"
+	"github.com/sinngae/gland/cmd/testcase/gland/errcode"
 	"github.com/sinngae/gland/pkg/gland"
 )
 
