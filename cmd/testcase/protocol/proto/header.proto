@@ -11,7 +11,7 @@ message ReqHeader {
 }
 
 message RespHeader {
-    required int32  retcode      = 1;
-    required string message      = 2;
-    optional string cause        = 3;
+    required int32  ret_code = 1;
+    required string message  = 2;
+    optional string cause    = 3;
 }

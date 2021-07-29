@@ -3,6 +3,8 @@ package rage
 import (
 	"fmt"
 	"sync"
+
+	"github.com/sinngae/gland/pkg/internal/debug_"
 )
 
 const debug = false
@@ -60,14 +62,14 @@ func (rage *Rage) moreWorker() {
 }
 
 func (rage *Rage) handle(job *Job, idx int) {
+	defer rage.wg.Done()
 	defer func() { // MAKE SURE to restart this goroutine when panic
 		if r := recover(); r != nil {
 			job.PanicHandler(r)
 		}
 	}()
-	defer rage.wg.Done()
 
-	if debug {
+	if debug_.IsDebugging(debug) {
 		fmt.Printf("worker[%d] ... ...\n", idx)
 	}
 

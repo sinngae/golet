@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	address    = "localhost:6606"
+	address    = "localhost:6100"
 	defaultMsg = "hi,work"
 )
 
