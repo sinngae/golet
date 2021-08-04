@@ -1,28 +1,28 @@
 package intercept
 
 import (
-	invoke2 "git.garena.com/ziqiang.ren/toolbox/utility/httplib/invoke"
-	trace2 "git.garena.com/ziqiang.ren/toolbox/utility/trace"
+	"github.com/sinngae/gland/pkg/httplib/invoke"
+	"github.com/sinngae/gland/pkg/trace"
 )
 
-var HttpRequestId = &invoke2.Interceptor{
-	Intercept: func(inv *invoke2.Invoker) {
+var HttpRequestId = &invoke.Interceptor{
+	Intercept: func(inv *invoke.Invoker) {
 		// do something before
-		requestId := trace2.GetRequestID(inv.Ctx)
-		inv.Options = append(inv.Options, invoke2.AddHeader("request-id", requestId))
-		inv.Options = append(inv.Options, invoke2.AddHeader("X-Request-Id", requestId))
+		requestId := trace.GetTraceID(inv.Ctx)
+		inv.Options = append(inv.Options, invoke.AddHeader("request-id", requestId))
+		inv.Options = append(inv.Options, invoke.AddHeader("X-Request-Id", requestId))
 
 		inv.Invoke()
 	},
 }
 
-func NewRequestIdInterceptor(prefix string) *invoke2.Interceptor {
-	return &invoke2.Interceptor{
-		Intercept: func(inv *invoke2.Invoker) {
+func NewRequestIdInterceptor(prefix string) *invoke.Interceptor {
+	return &invoke.Interceptor{
+		Intercept: func(inv *invoke.Invoker) {
 			// do something before
-			requestId := prefix + trace2.GetRequestID(inv.Ctx)
-			inv.Options = append(inv.Options, invoke2.AddHeader("request-id", requestId))
-			inv.Options = append(inv.Options, invoke2.AddHeader("X-Request-Id", requestId))
+			requestId := prefix + trace.GetTraceID(inv.Ctx)
+			inv.Options = append(inv.Options, invoke.AddHeader("request-id", requestId))
+			inv.Options = append(inv.Options, invoke.AddHeader("X-Request-Id", requestId))
 
 			inv.Invoke()
 		},

@@ -1,14 +1,14 @@
 package intercept
 
 import (
-	invoke2 "git.garena.com/ziqiang.ren/toolbox/utility/httplib/invoke"
+	"github.com/sinngae/gland/pkg/httplib/invoke"
 )
 
-func NewAddHeaderInterceptor(key, val string) *invoke2.Interceptor {
-	return &invoke2.Interceptor{
-		Intercept: func(inv *invoke2.Invoker) {
+func NewAddHeaderInterceptor(key, val string) *invoke.Interceptor {
+	return &invoke.Interceptor{
+		Intercept: func(inv *invoke.Invoker) {
 			// do something before
-			inv.Options = append(inv.Options, invoke2.AddHeader(key, val))
+			inv.Options = append(inv.Options, invoke.AddHeader(key, val))
 
 			inv.Invoke()
 			// do something after

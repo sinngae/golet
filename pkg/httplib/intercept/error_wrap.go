@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"net/http"
 
-	invoke2 "git.garena.com/ziqiang.ren/toolbox/utility/httplib/invoke"
+	"github.com/sinngae/gland/pkg/httplib/invoke"
 )
 
-var HttpErrorWrap = &invoke2.Interceptor{
-	Intercept: func(inv *invoke2.Invoker) {
+var HttpErrorWrap = &invoke.Interceptor{
+	Intercept: func(inv *invoke.Invoker) {
 		// do something before
 		inv.Invoke()
 		// do something after

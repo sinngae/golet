@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"net/http"
 
-	jwt2 "git.garena.com/ziqiang.ren/toolbox/utility/httplib/jwt"
+	"github.com/sinngae/gland/pkg/httplib/jwt"
 
 	"github.com/valyala/fasthttp"
 )
@@ -89,7 +89,7 @@ func (inv *Invoker) request() {
 	}
 
 	if option.jwtMode == JwtModeJWTHeader {
-		token, err := jwt2.Sign(option.operator, option.secretKey, option.jwtOpts...)
+		token, err := jwt.Sign(option.operator, option.secretKey, option.jwtOpts...)
 		if err != nil {
 			inv.RespErr = fmt.Errorf("jwt sign failed, err=%v", err)
 			return

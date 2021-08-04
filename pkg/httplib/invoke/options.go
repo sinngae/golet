@@ -3,7 +3,7 @@ package invoke
 import (
 	"time"
 
-	jwt2 "git.garena.com/ziqiang.ren/toolbox/utility/httplib/jwt"
+	"github.com/sinngae/gland/pkg/httplib/jwt"
 )
 
 type optional struct {
@@ -23,7 +23,7 @@ type optional struct {
 	jwtKey    string
 	operator  string
 	secretKey string
-	jwtOpts   []jwt2.OptionFunc
+	jwtOpts   []jwt.OptionFunc
 }
 
 type OptionFunc func(*optional)

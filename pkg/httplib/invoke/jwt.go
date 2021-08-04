@@ -1,7 +1,7 @@
 package invoke
 
 import (
-	jwt2 "git.garena.com/ziqiang.ren/toolbox/utility/httplib/jwt"
+	"github.com/sinngae/gland/pkg/httplib/jwt"
 )
 
 const (
@@ -10,7 +10,7 @@ const (
 	JwtModeJWTBody
 )
 
-func SetJwtHeader(key, operator string, secret string, opts ...jwt2.OptionFunc) OptionFunc {
+func SetJwtHeader(key, operator string, secret string, opts ...jwt.OptionFunc) OptionFunc {
 	return func(options *optional) {
 		options.jwtMode = JwtModeJWTHeader
 		options.jwtKey = key
@@ -20,7 +20,7 @@ func SetJwtHeader(key, operator string, secret string, opts ...jwt2.OptionFunc) 
 	}
 }
 
-func SetJwtBody(key, operator string, secret string, opts ...jwt2.OptionFunc) OptionFunc {
+func SetJwtBody(key, operator string, secret string, opts ...jwt.OptionFunc) OptionFunc {
 	return func(options *optional) {
 		options.jwtMode = JwtModeJWTBody
 		options.jwtKey = key
