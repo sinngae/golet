@@ -43,14 +43,16 @@ bin
 # ignore any log
 log
 
-setting/dev.json
 play/
 scratch*
 
-protocol/py/pack_temp
+main
 
-conf/*/*.properties
-go.sum
-
+scripts/sql2go/tmp/*
 *.png
 
+# config
+conf
+
+# txt ?
+*.txt
