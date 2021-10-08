@@ -1,0 +1,28 @@
+syntax = "proto2";
+
+package header;
+
+option go_package = "./header;header";
+
+message ReqHeader {
+    required string request_id = 1;
+    required string account    = 2; // caller account
+    required string token      = 3; // caller token
+    required uint32 timestamp  = 4;
+    required string caller_ip  = 5;
+}
+
+message RespHeader {
+    required string request_id   = 1;
+    required int32  retcode      = 2;
+    required string message      = 3;
+    optional string trace_number = 4;
+    optional string cause        = 5;
+}
+
+message ErrDetail {
+    required int32 retcode = 1;
+    required string message = 2;
+    optional string detail = 3;
+    optional string debug = 4;
+}
