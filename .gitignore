@@ -48,7 +48,6 @@ scratch*
 
 main
 
-scripts/sql2go/tmp/*
 *.png
 
 # config
