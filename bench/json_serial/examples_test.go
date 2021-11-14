@@ -63,3 +63,22 @@ func TestRawJsonUnmarshal(t *testing.T) {
 		}
 	})
 }
+
+func ExampleBytes() {
+	data := struct {
+		Data []byte
+	}{
+		[]byte("abcd"),
+	}
+	body, _ := json.Marshal(data)
+	println(body)
+	data2 := &struct {
+		Data []byte
+	}{}
+	_ = json.Unmarshal(body, data2)
+	str := fmt.Sprintf("%s", data2)
+	println(str)
+	// output:
+	//{"Data":"YWJjZA=="}
+	//&{abcd}
+}

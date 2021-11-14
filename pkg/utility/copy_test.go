@@ -2,7 +2,6 @@ package utility
 
 import (
 	"fmt"
-	"testing"
 
 	"google.golang.org/protobuf/proto"
 )
@@ -57,44 +56,28 @@ type cpDest struct {
 	VDestSpecial int
 }
 
-func TestMustCopy(t *testing.T) {
-	type args struct {
-		src  *cpSrc
-		want *cpDest
+func ExampleMustCopy() {
+	src := &cpSrc{
+		VInt:        123,
+		VStr:        "test",
+		VIntBig:     123,
+		VIntSml:     999999999999999,
+		VIntFlt:     1000000000001,
+		VIntUint:    -123,
+		VUintInt:    123,
+		VFltInt:     1000000000.123,
+		VFltBig:     1.2121212,
+		VFltSml:     1.000000000000001,
+		VStrPtr:     "test",
+		VPtrStr:     proto.String("test"),
+		VIntStr:     0123,
+		VStrInt:     "234234",
+		VSrcSpecial: 234,
 	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		{
-			name: "case 0",
-			args: args{
-				src: &cpSrc{
-					VInt:        123,
-					VStr:        "test",
-					VIntBig:     123,
-					VIntSml:     999999999999999,
-					VIntFlt:     1000000000001,
-					VIntUint:    -123,
-					VUintInt:    123,
-					VFltInt:     1000000000.123,
-					VFltBig:     1.2121212,
-					VFltSml:     1.000000000000001,
-					VStrPtr:     "test",
-					VPtrStr:     proto.String("test"),
-					VIntStr:     0123,
-					VStrInt:     "234234",
-					VSrcSpecial: 234,
-				},
-				want: &cpDest{},
-			},
-		},
-	}
-	for _, tt := range tests {
-		out := &cpDest{}
-		t.Run(tt.name, func(t *testing.T) {
-			MustCopy(out, tt.args.src)
-			fmt.Println(out)
-		})
-	}
+
+	dest := &cpDest{}
+	MustCopy(dest, src)
+	fmt.Println(dest)
+	// output:
+
 }

@@ -26,28 +26,50 @@ func ExampleMarshalIndent() {
 
 }
 
-func ExampleXml() {
+func ExampleXmlMarshal() {
+	const header = `<?xml version="1.0" encoding="UTF-8"?>`
 	type OrderNo struct {
 		OrderNo string `xml:"OrderNo"`
 	}
-	type Data struct {
-		XmlName  xml.Name  `xml:"Doc"`
+	type Doc struct {
 		ParentId string    `xml:"ParentId"`
 		EshopId  string    `xml:"EshopId"`
 		OrderNos []OrderNo `xml:"OrderNos"`
 	}
-	type Doc struct {
-		Data Data `xml:"Doc"`
-	}
+	//type Doc struct {
+	//	Data Data `xml:"Doc"`
+	//}
 	doc := Doc{
-		Data{
-			ParentId: "test",
-			EshopId:  "eshop",
-			OrderNos: []OrderNo{{"123"}, {"2312"}},
-		},
+		ParentId: "test",
+		EshopId:  "eshop",
+		OrderNos: []OrderNo{{"123"}, {"2312"}},
 	}
-	got, err := xml.MarshalIndent(doc, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "")
-	fmt.Println(got)
+	got, err := xml.MarshalIndent(doc, "", "")
+	fmt.Println(header + string(got))
+	fmt.Println(err)
+	//output:
+}
+
+func ExampleXmlUnmarshal() {
+	const header = `<?xml version="1.0" encoding="UTF-8"?>`
+	type OrderNo struct {
+		OrderNo string `xml:"OrderNo"`
+	}
+	type Doc struct {
+		ParentId string    `xml:"ParentId"`
+		EshopId  string    `xml:"EshopId"`
+		OrderNos []OrderNo `xml:"OrderNos"`
+	}
+	//type Doc struct {
+	//	Data Data `xml:"Doc"`
+	//}
+	doc := Doc{
+		ParentId: "test",
+		EshopId:  "eshop",
+		OrderNos: []OrderNo{{"123"}, {"2312"}},
+	}
+	got, err := xml.Unmarshal(doc, "", "")
+	fmt.Println(header + string(got))
 	fmt.Println(err)
 	//output:
 
