@@ -1,5 +1,5 @@
 # Delve
-Golang 活体解刨分析
+Golang 活体解剖分析
 
 ## 过程
 + `dlv attach [pid]`

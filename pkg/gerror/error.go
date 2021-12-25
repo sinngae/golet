@@ -1,12 +1,15 @@
 package gerror
 
-import "encoding/json"
+import (
+	"encoding/json"
+)
 
 type GError struct {
-	Err     error    `json:"error"`
-	RetCode int64    `json:"ret_code"`
-	Detail  []string `json:"detail"`
-	Debug   string   `json:"debug"`
+	Err     error       `json:"error,omitempty"`
+	RetCode int64       `json:"ret_code"`
+	Message string      `json:"detail"`
+	Debug   string      `json:"debug"`
+	Data    interface{} `json:"data"`
 }
 
 func (ge *GError) Error() string {

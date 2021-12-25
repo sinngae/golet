@@ -1,4 +1,4 @@
-package lane_build
+package link
 
 type Resource struct {
 	name        string

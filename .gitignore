@@ -43,15 +43,6 @@ bin
 # ignore any log
 log
 
-play/
-scratch*
-
-main
-
-*.png
-
 # config
 conf
 
-# txt ?
-*.txt

@@ -1,4 +1,6 @@
-> ## Gland feedback
+Gland 
+---
+> ## Feedback
 > It's lovely to hear your suggestion，share your thoughts hear: https://github.com/sinngae/gland/issues
 >
 > **Thank you!**
