@@ -2,9 +2,8 @@ package rage
 
 import (
 	"fmt"
+	debug_2 "github.com/sinngae/gland/pkg/debug"
 	"sync"
-
-	"github.com/sinngae/gland/pkg/internal/debug_"
 )
 
 const debug = false
@@ -69,7 +68,7 @@ func (rage *Rage) handle(job *Job, idx int) {
 		}
 	}()
 
-	if debug_.IsDebugging(debug) {
+	if debug_2.IsDebugging(debug) {
 		fmt.Printf("worker[%d] ... ...\n", idx)
 	}
 

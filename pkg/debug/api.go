@@ -1,4 +1,4 @@
-package debug_
+package debug
 
 func IsDebugging(debug bool) bool {
 	if Debug {

@@ -1,14 +1,15 @@
 package main
 
 import (
+	"github.com/sinngae/gland/pkg/debug"
 	"log"
-
-	"github.com/sinngae/gland/pkg/internal/debug_"
 )
 
 func main() {
-	if debug_.IsDebugging(false) {
+	if debug.IsDebugging(false) {
 		log.Printf("service run under debug mode...\n")
 	}
 	log.Printf("service run...")
+	// output
+	
 }

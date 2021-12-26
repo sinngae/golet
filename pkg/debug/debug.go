@@ -1,5 +1,5 @@
 // +build debug
 
-package debug_
+package debug
 
 const Debug = true
