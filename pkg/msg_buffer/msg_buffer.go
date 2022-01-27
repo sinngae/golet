@@ -2,7 +2,6 @@ package msg_buffer
 
 import (
 	"fmt"
-	debug_2 "github.com/sinngae/gland/pkg/debug"
 	"sync"
 	"time"
 )
@@ -64,7 +63,7 @@ func NewMsgBuffer(size int, keepBufSecs int, handler func([]string)) *MsgBuffer 
 					obj.timer.Reset(interval)
 				case ctl := <-obj.control:
 					if ctl == ctlStop {
-						if debug_2.IsDebugging(debug) {
+						if debug {
 							fmt.Printf("msg_buffer: stop ...\n")
 						}
 						return
@@ -96,7 +95,7 @@ func (obj *MsgBuffer) handle(now time.Time, running bool) {
 
 	if running {
 		if len(obj.data) <= obj.limit && now.Before(obj.nextSendTime) {
-			if debug_2.IsDebugging(debug) {
+			if debug {
 				fmt.Printf("@debug msg_buffer: wait buffer full or timer tick ...\n")
 			}
 			return
@@ -113,7 +112,7 @@ func (obj *MsgBuffer) tick(running bool) {
 	now := time.Now()
 	nowStr := now.Format(time.RFC3339)
 	if running {
-		if debug_2.IsDebugging(debug) {
+		if debug {
 			fmt.Printf("msg_buffer: timer tick @%s ...\n", nowStr)
 		}
 	}

@@ -83,3 +83,12 @@ func Example() {
 func TestMain(m *testing.M) {
 	os.Exit(m.Run()) // Run call main or testcases?
 }
+
+func ExampleErr() {
+	err := fmt.Errorf("this test")
+	err2 := error(nil)
+	data := fmt.Sprintf("err:%v, err2:%v", err, err2)
+	fmt.Println(data)
+	//output:
+	//err:this test, err2:<nil>
+}

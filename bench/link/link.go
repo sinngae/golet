@@ -122,7 +122,7 @@ func Link3(data *[]*[]*Resource) []*[]*Resource {
 				for _, rsrB := range *(*data)[idxB] {
 					if next == rsrB.name {
 						compose = append(compose, rsrA, rsrB)
-						record[]
+						//record[]
 						stack = append(stack, &compose)
 					}
 				}

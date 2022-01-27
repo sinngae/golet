@@ -1,5 +1,5 @@
 package internal
 
-const (
-	HeadBoxFlag uint8 = 1 << 7
+const ( // id-type
+	HeadIdTypeBox uint8 = 1
 )

@@ -1,4 +1,4 @@
-package obj
+package stdst
 
 type BaseSt struct {
 	id  int
@@ -14,6 +14,7 @@ func ExampleObj() {
 	st := &St{BaseSt: &BaseSt{id: 1, val: "hi"}}
 	var bst *BaseSt
 	bst = st.BaseSt
+
 	println(bst)
 	// output:
 

@@ -2,7 +2,6 @@ package rage
 
 import (
 	"fmt"
-	debug_2 "github.com/sinngae/gland/pkg/debug"
 	"sync"
 )
 
@@ -41,9 +40,8 @@ func NewRage(workerNum int) *Rage {
 // AppendJob Concurrently safe
 func (rage *Rage) AppendJob(job *Job) {
 	rage.moreWorker()
-
-	rage.jobCh <- job
 	rage.wg.Add(1)
+	rage.jobCh <- job
 }
 
 func (rage *Rage) moreWorker() {
@@ -68,7 +66,7 @@ func (rage *Rage) handle(job *Job, idx int) {
 		}
 	}()
 
-	if debug_2.IsDebugging(debug) {
+	if debug {
 		fmt.Printf("worker[%d] ... ...\n", idx)
 	}
 
