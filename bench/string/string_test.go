@@ -79,3 +79,22 @@ func TestSprintf(t *testing.T) {
 		})
 	}
 }
+
+func TestSplit(t *testing.T) {
+	tts := []struct {
+		src   string
+		sp    string
+		first string
+	}{
+		{"abc@d3f.mail", "@", "abc"},
+		{"", "@", ""},
+	}
+
+	for idx, tc := range tts {
+		t.Run(fmt.Sprintf("case %d", idx), func(t *testing.T) {
+			got := strings.Split(tc.src, tc.sp)
+			fmt.Println(got)
+			assert.Equal(t, tc.first, got[0])
+		})
+	}
+}

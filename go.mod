@@ -3,6 +3,7 @@ module github.com/sinngae/gland
 go 1.14
 
 require (
+	github.com/360EntSecGroup-Skylar/excelize/v2 v2.3.2
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/emicklei/go-restful v2.15.0+incompatible
 	github.com/gin-gonic/gin v1.7.2
@@ -13,9 +14,14 @@ require (
 	github.com/jinzhu/copier v0.3.2
 	github.com/json-iterator/go v1.1.10
 	github.com/mwitkow/go-proto-validators v0.3.2
+	github.com/onsi/ginkgo v1.16.5 // indirect
+	github.com/onsi/gomega v1.19.0 // indirect
+	github.com/panjf2000/ants/v2 v2.5.0 // indirect
 	github.com/patrickmn/go-cache v2.1.0+incompatible
+	github.com/psykhi/wordclouds v0.0.0-20220103101922-7e3171a66cbc
 	github.com/satori/go.uuid v1.2.0
-	github.com/stretchr/testify v1.7.0
+	github.com/spf13/cobra v1.4.0
+	github.com/stretchr/testify v1.7.1
 	github.com/valyala/fasthttp v1.21.0
 	google.golang.org/grpc v1.38.0
 	google.golang.org/protobuf v1.27.1

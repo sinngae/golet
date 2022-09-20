@@ -3,66 +3,7 @@ package json_serial
 import (
 	"encoding/json"
 	"fmt"
-	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
-
-func TestRawJson(t *testing.T) {
-	t.Run("test raw json", func(t *testing.T) {
-		header := json.RawMessage(`{"request_id":"abc"}`)
-		data := struct {
-			Header *json.RawMessage `json:"header"`
-			Body   string           `json:"body"`
-		}{
-			Header: &header,
-			Body:   "hi, data",
-		}
-		bin, err := json.MarshalIndent(&data, "", "\t")
-		assert.NoError(t, err)
-		fmt.Println(bin)
-	})
-}
-
-func TestRawJsonUnmarshal(t *testing.T) {
-	t.Run("test unmarshal raw json", func(t *testing.T) {
-		type Color struct {
-			Space string
-			Point json.RawMessage // delay parsing until we know the color space
-		}
-		type RGB struct {
-			R uint8
-			G uint8
-			B uint8
-		}
-		type YCbCr struct {
-			Y  uint8
-			Cb int8
-			Cr int8
-		}
-
-		var j = []byte(`[
-	{"Space": "YCbCr", "Point": {"Y": 255, "Cb": 0, "Cr": -10}},
-	{"Space": "RGB",   "Point": {"R": 98, "G": 218, "B": 255}}
-]`)
-		var colors []Color
-		err := json.Unmarshal(j, &colors)
-		assert.NoError(t, err)
-
-		for _, c := range colors {
-			var dst interface{}
-			switch c.Space {
-			case "RGB":
-				dst = new(RGB)
-			case "YCbCr":
-				dst = new(YCbCr)
-			}
-			err := json.Unmarshal(c.Point, dst)
-			assert.NoError(t, err)
-			fmt.Println(c.Space, dst)
-		}
-	})
-}
 
 func ExampleBytes() {
 	data := struct {
@@ -81,4 +22,19 @@ func ExampleBytes() {
 	// output:
 	//{"Data":"YWJjZA=="}
 	//&{abcd}
+}
+
+func ExampleJson() {
+	var rawData = map[string]interface{}{}
+	data := []byte(`{"jwt":"eyJhY2NvdW50Ijoic2VsbGVyLmZ1bGxmaWxsbWVudCIsImFsZyI6IkhTMjU2IiwidHlwIjoiSldUIn0.eyJkYXRhIjp7InNsc190bl9saXN0IjpbeyJjb3VudHJ5IjoiQ08iLCJzbHNfdG4iOiJDTzIyMjMwNzA1OTk1NTEwS0gifV0sInRpbWVzdGFtcCI6MTY0NTc1NzQxMn0sInRpbWVzdGFtcCI6MTY0NTc1NzQxMn0.wfBl7_7p0kOBG9YhvgWBq4WU8Bu6yV3MW_jCkdgGyCo","sls_tn_list":[{"country":"CO","sls_tn":"CO22230705995510KH"}],"timestamp":1645757412}`)
+	e := json.Unmarshal(data, &json.RawMessage{})
+	if e == nil { // must be a json
+		// reflect data
+		if e := json.Unmarshal(data, &rawData); e != nil {
+			return
+		}
+	}
+	println("end")
+	// output:
+
 }
