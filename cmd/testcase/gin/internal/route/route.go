@@ -2,7 +2,7 @@ package route
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/sinngae/gland/cmd/testcase/gin/internal/route/handler"
+	"github.com/sinngae/golet/cmd/testcase/gin/internal/route/handler"
 )
 
 func Init(router *gin.Engine) *gin.Engine {

@@ -1,57 +1,24 @@
-Gland 
----
-> ## Feedback
-> It's lovely to hear your suggestion，share your thoughts hear: https://github.com/sinngae/gland/issues
->
-> **Thank you!**
+Golet
+----
+Go 代码片段
+# Purpose
+1. 减少重复造"轮子"等零件，也即提供最具扩展性、可用性的零件
+2. 做零件的仓库，也即提供各种广泛使用的零件
+3. 零件的"售后"和升级，也即提供零件的版本管理、安全增强、性能增强等升级
 
+使用 Golet，可以带来：
++ 快速初始化 gitlab工程
++ 低代码开发
++ 减少Copy代码，降低维护成本
 
-## Install
-```console
-go get github.com/sinngae/gland
-``` 
-
-## What is Gland
-Gland is a solution for Go RPC & Web Service common packages. It has:
-+ gland
-    + error handling
-    + error tracing
-    + return code handling
-
-Gland want to be thought of as rich packages for Go Service utility.
-
-## Binding error With Values
-```go
-    err := fmt.Errorf("this is cause")
-
-    err = gland.WithMessage(err, "this is msg")
-    // err.Error() -> {"message":"this is msg", "err":"this is cause"}
-
-    err = gland.RetCode(err, 404)
-    // err.Error() -> {"retcode":404, "err":"this is cause"}
-
-    rcMsg := NewRetCodeMsg(404, "this is msg")
-    err = gland.WithRetCodeMessage(err, rcMsg)
-    // err = gland.WithRetCodeMessagef(err, 404, "this is msg")
-    // err.Error() -> {"retcode":404, "message":"this is msg", "err":"this is cause"}
-
-    err = gland.WithStack(err) 
-    /* err.Error() will be:
-        {"stack":
-        "/Users/ziqiangren/gitwork/gland/internal/stack.go:19 (0x10fb1fd)
-        /Users/ziqiangren/gitwork/gland/stack.go:22 (0x10fb1f1)
-        /Users/ziqiangren/gitwork/gland/stack.go:17 (0x10fb133)
-        /Users/ziqiangren/gitwork/gland/stack_test.go:9 (0x10fc2d1)
-        /usr/local/Cellar/go@1.13/1.13.15/libexec/src/runtime/proc.go:5228 (0x103a189)
-        /usr/local/Cellar/go@1.13/1.13.15/libexec/src/runtime/proc.go:5223 (0x103a156)
-        /usr/local/Cellar/go@1.13/1.13.15/libexec/src/runtime/proc.go:190 (0x102df61)
-        /usr/local/Cellar/go@1.13/1.13.15/libexec/src/runtime/asm_amd64.s:1357 (0x1059610)
-        ", "sum":"d172cdbeb85c21276423d3ede5dfd046", "err":"this is cause"}
-    */
+# Quick Start
+```sh
+go get github.com/sinngae/golet
 ```
 
-## Roadmap
-+ 0.1.5 add stack & hash sum
 
-## License
-MIT
+# Contribute to Golet
++ 没有代码实现，仅有需求，可以在 https://github.com/sinngae/golet/-/issues/new 新建Gitlab Issue, label标记为Proposal
++ 有代码实现，可以提交 Merge Request
+    + 请提供充分必要的测试用例
+    + 代码不能import具体的业务项目工程gitlab

@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/sinngae/gland/cmd/testcase/gin/internal/route"
+	"github.com/sinngae/golet/cmd/testcase/gin/internal/route"
 )
 
 func main() {

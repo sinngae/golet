@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/sinngae/gland/cmd/testcase/gland/errcode"
-	"github.com/sinngae/gland/pkg/gland"
+	"github.com/sinngae/golet/cmd/testcase/gland/errcode"
+	"github.com/sinngae/golet/src/gland"
 )
 
 func main() {

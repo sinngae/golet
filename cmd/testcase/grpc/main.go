@@ -8,7 +8,7 @@ import (
 
 	"google.golang.org/grpc"
 
-	pb "github.com/sinngae/gland/cmd/testcase/protocol/go"
+	pb "github.com/sinngae/golet/cmd/testcase/protocol/go"
 )
 
 const (

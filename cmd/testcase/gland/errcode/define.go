@@ -1,6 +1,6 @@
 package errcode
 
-import "github.com/sinngae/gland/pkg/gland"
+import "github.com/sinngae/golet/src/gland"
 
 const (
 	// code 0 ~ 99

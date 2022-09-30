@@ -1,6 +1,6 @@
 package main
 
-import "github.com/sinngae/gland/cmd/gland/internal"
+import "github.com/sinngae/golet/cmd/gland/internal"
 
 func main() {
 	internal.Execute()

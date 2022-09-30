@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	pb "github.com/sinngae/gland/cmd/testcase/protocol/go"
+	pb "github.com/sinngae/golet/cmd/testcase/protocol/go"
 	"google.golang.org/grpc"
 )
 

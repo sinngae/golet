@@ -8,7 +8,7 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/sinngae/gland/pkg/gland"
+	"github.com/sinngae/golet/src/gland"
 )
 
 // formDataCheck 文件类型检测 + 文件大小检测
