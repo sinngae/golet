@@ -1,13 +1,14 @@
 package tcp
 
 import (
-	"net"
+	"fmt"
 	"net/http"
 )
 
 func ExampleTcpServer() {
-	net.Listen("127.0.0.1")
-	http.ListenAndServe()
+	//lst, err := net.Listen("tcp", "127.0.0.1")
+	err := http.ListenAndServe("127.0.0.1", nil)
+	fmt.Printf("%s", err)
 	//output:
 
 }

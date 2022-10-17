@@ -1,8 +1,15 @@
 package stdst
 
+func DemoItf(itf *interface{}) interface{} {
+	return itf
+}
+
 func ExampleInterface() {
 	var itf1, itf2 interface{}
 	itf1 = nil
+	a := &itf1
+	//a := new(int)
+	DemoItf(a)
 	println(itf1 == nil)
 	itf2 = 2
 	itf2 = "nil"

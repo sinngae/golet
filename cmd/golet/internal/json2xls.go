@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/sinngae/golet/cmd/gland/internal/json2xls"
+	"github.com/sinngae/golet/cmd/golet/internal/json2xls"
 
 	"github.com/spf13/cobra"
 )

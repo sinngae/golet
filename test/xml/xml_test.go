@@ -63,12 +63,13 @@ func ExampleXmlUnmarshal() {
 	//type Doc struct {
 	//	Data Data `xml:"Doc"`
 	//}
-	doc := Doc{
+	doc := &Doc{
 		ParentId: "test",
 		EshopId:  "eshop",
 		OrderNos: []OrderNo{{"123"}, {"2312"}},
 	}
-	got, err := xml.Unmarshal(doc, "", "")
+	got := make([]byte, 0)
+	err := xml.Unmarshal(got, doc)
 	fmt.Println(header + string(got))
 	fmt.Println(err)
 	//output:
