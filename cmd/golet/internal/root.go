@@ -17,9 +17,9 @@ var (
 
 	// cmdRoot
 	cmdRoot = &cobra.Command{
-		Use:   "gland",
-		Short: "gland is a tool for Dev daily work",
-		Long:  `gland is a tool for developer daily work.`,
+		Use:   "golet",
+		Short: "golet is a tool for Dev daily work",
+		Long:  `golet is a tool for developer daily work.`,
 		PersistentPreRun: func(cmd *cobra.Command, args []string) {
 			ctxCom = context.WithValue(context.Background(), "host", "zqren-test")
 			ctxCom = context.WithValue(ctxCom, "user-agent", "")

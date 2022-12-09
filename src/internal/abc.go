@@ -12,9 +12,9 @@ Dance:
 	for { //keep going
 		if life.Cheated(you) {
 			for { // will you linger at this
-				break // just have a break
+				break // or just have a break
 			}
-			goto Dance
+			goto Dance // and goto dance
 		}
 	}
 }
