@@ -14,7 +14,7 @@ var (
 		Use:   "json2xml",
 		Short: "trans json str to xml file",
 		Run: func(cmd *cobra.Command, args []string) {
-			err := json2xls.Json2Xls("", "")
+			err := json2xls.Json2Xls(input, output)
 			if err != nil {
 				log.Fatalf("err=%s", err)
 			}

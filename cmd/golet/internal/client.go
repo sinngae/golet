@@ -1,7 +1,7 @@
 package internal
 
 import (
-	"github.com/sinngae/golet/cmd/golet/internal/gin"
+	"github.com/sinngae/golet/cmd/internal/gin"
 	"github.com/spf13/cobra"
 )
 

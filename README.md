@@ -26,3 +26,14 @@ go get github.com/sinngae/golet
 + 有代码实现，可以提交 Merge Request
     + 请提供充分必要的测试用例
     + 代码不能import具体的业务项目工程gitlab
+
+# Docker For Golet
+## win
+```shell
+# build image
+docker build --network=host -v .:/build -t golet:base .
+# build golet
+## docker run --entrypoint "" --rm -it --network=host --privileged=true -v $(CURDIR):/build ${DOCKER_IMAGE} /bin/bash
+## test
+docker run --entrypoint "" --rm -it --network=host --privileged=true -v .:/build centos-base:master /bin/bash
+```
