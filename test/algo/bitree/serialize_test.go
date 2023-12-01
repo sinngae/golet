@@ -4,6 +4,9 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 type TreeNode struct {
@@ -34,14 +37,34 @@ func Deserialize(s string) *TreeNode {
 		return nil
 	}
 
-	root := &TreeNode{}
-	data := []*TreeNode{toNode(list[0])}
+	root := toNode(list[0])
+	data := []*TreeNode{root}
 	idx := 1
+	preNode := root
 	for {
-		node := data[0]
-		data = data[1:]
-
+		leftChild := toNode(list[idx])
+		preNode.Left = leftChild
+		if leftChild != nil {
+			data = append(data, leftChild)
+			preNode = leftChild
+		} else {
+			//preNode
+		}
+		idx++
+		if idx >= len(list) {
+			break
+		}
+		rightChild := toNode(list[idx])
+		//parent.Right = rightChild
+		if rightChild != nil {
+			data = append(data, rightChild)
+		}
+		idx++
+		if len(data) <= 0 {
+			break
+		}
 	}
+	return root
 }
 
 func toNode(str string) *TreeNode {
@@ -50,4 +73,24 @@ func toNode(str string) *TreeNode {
 	}
 	val, _ := strconv.Atoi(str)
 	return &TreeNode{Val: val}
+}
+
+func TestSerialize(t *testing.T) {
+	tcs := []struct {
+		str  string
+		want string
+	}{
+		{
+			str:  "1,2,3,4,5,6,#,7,#,#,8,#",
+			want: "1,2,3,4,5,6,#,7,#,#,8,#",
+		},
+	}
+	for _, tc := range tcs {
+		t.Run("case 0", func(t *testing.T) {
+			node := Deserialize(tc.str)
+			got := Serialize(node)
+			fmt.Printf("str:%s\n", got)
+			assert.Equal(t, tc.want, got)
+		})
+	}
 }
