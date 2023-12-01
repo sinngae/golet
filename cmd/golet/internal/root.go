@@ -33,6 +33,7 @@ func init() {
 	cmdRoot.PersistentFlags().StringVarP(&input, "input", "i", "in.txt", "input file path, read io/stream")
 	cmdRoot.PersistentFlags().StringVarP(&output, "output", "o", "out.txt", "output file path, write io/stream")
 	cmdRoot.PersistentFlags().StringVarP(&env, "env", "e", "test", "env param")
+	cmdRoot.PersistentFlags().StringVarP(&env, "cfg", "c", "config.yaml", "config yaml file")
 }
 
 // Execute the refresh tool

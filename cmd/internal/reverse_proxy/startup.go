@@ -1,28 +1,23 @@
-package gin
+package reverse_proxy
 
 import (
 	"context"
 	"fmt"
 	"log"
-	"net/url"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
 )
 
-func Startup(param string) {
+func StartUp() {
 	startAt := time.Now()
 	fmt.Printf("service starting... @ %s\n", startAt)
 
 	var srv *Server
 	go func() {
-		sp := parseStartParam(param)
-		srv = NewServer(sp.port)
-		err := srv.Startup()
-		if err != nil {
-			log.Fatalf("startup err:%s", err.Error())
-		}
+		srv = NewServer(":8080")
+		_ = srv.Startup()
 	}()
 
 	// exit elegantly
@@ -41,25 +36,4 @@ func Startup(param string) {
 	}
 
 	log.Println("Server exiting")
-}
-
-type StartParam struct {
-	port string
-}
-
-func parseStartParam(param string) *StartParam {
-	valList, err := url.ParseQuery(param)
-	if err != nil {
-		panic(fmt.Sprintf("parse %s failed, err=%s", param, err))
-		return nil
-	}
-
-	sp := &StartParam{}
-	for k, v := range valList {
-		switch k {
-		case "port":
-			sp.port = v[0]
-		}
-	}
-	return sp
 }

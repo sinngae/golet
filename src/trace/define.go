@@ -1,5 +1,5 @@
 package trace
 
 const (
-	HeaderKeyTraceId = "__TRACE_ID__"
+	HeaderKeyTraceId = "X-Trace-Id"
 )

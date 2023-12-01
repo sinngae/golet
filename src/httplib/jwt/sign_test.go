@@ -4,6 +4,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/dgrijalva/jwt-go"
+
 	"github.com/stretchr/testify/assert"
 
 	"fmt"
@@ -40,7 +42,19 @@ func TestSign(t *testing.T) {
 		},
 		secret: testSecret,
 	}
-	got, err := Sign(testOptr, argsTest.secret, SetClaims(argsTest.claims))
+	got, err := Sign(argsTest.secret, SetClaims(argsTest.claims))
 	assert.NoError(t, err)
 	fmt.Printf("jwt-token: %s\n", got)
+}
+
+func ExampleJwtRS256() {
+	got, err := Sign(testSecret, SetClaims(map[string]interface{}{
+		"demo": "abc",
+	}), SetJwtAlgo(jwt.SigningMethodRS256))
+	if err != nil {
+		panic(err)
+	}
+	print(got)
+	// output:
+
 }

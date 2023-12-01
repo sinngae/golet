@@ -7,18 +7,13 @@ import (
 	jsoniter "github.com/json-iterator/go"
 )
 
-const (
-	typeJwt = "JWT"
-)
-
-func Sign(optr, secret string, opts ...OptionFunc) (string, error) {
+func Sign(secret string, opts ...OptionFunc) (string, error) {
 	option := parseOptionFunc(opts)
 	jwtClaims := jwt.MapClaims(option.claims)
 	token := &jwt.Token{
 		Header: map[string]interface{}{
-			"typ":  typeJwt,
-			"alg":  option.method.Alg(),
-			"optr": optr,
+			"typ": "JWT",
+			"alg": option.method.Alg(),
 		},
 		Claims: jwtClaims,
 		Method: option.method,
@@ -38,7 +33,7 @@ func Sign2(optr, secret string, body []byte, opts ...OptionFunc) (string, error)
 
 	token := &jwt.Token{
 		Header: map[string]interface{}{
-			"typ":     typeJwt,
+			"typ":     "JWT",
 			"alg":     option.method.Alg(),
 			"account": optr,
 		},

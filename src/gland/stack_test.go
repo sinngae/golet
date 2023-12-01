@@ -2,21 +2,20 @@ package gland
 
 import (
 	"fmt"
-	"testing"
 )
 
-var (
-	errWithStack = WithStack(fmt.Errorf("this is cause"))
-)
-
-func TestWithStack(t *testing.T) {
-	fmt.Println(errWithStack)
+func ExampleStack() {
+	st := stack(0)
+	str := string(st)
+	fmt.Println(str)
+	// output:
+	// afsdf
 }
 
-func TestNewStack(t *testing.T) {
-	fmt.Println(NewStack())
-}
+func ExampleStack1() {
+	st := Stack()
+	str := string(st)
+	fmt.Println(str)
+	// output:
 
-func TestStack(t *testing.T) {
-	fmt.Printf("%+v", Stack(errWithStack))
 }

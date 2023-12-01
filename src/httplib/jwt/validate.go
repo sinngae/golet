@@ -6,10 +6,8 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
-func Verify(tokenStr string, secret string) (map[string]interface{}, map[string]interface{}, error) {
-	token, err := jwt.Parse(tokenStr, func(token *jwt.Token) (interface{}, error) {
-		return []byte(secret), nil
-	})
+func Verify(tokenStr string, keyFunc func(token *jwt.Token) (interface{}, error)) (map[string]interface{}, map[string]interface{}, error) {
+	token, err := jwt.Parse(tokenStr, keyFunc)
 	if err != nil {
 		if ve, ok := err.(*jwt.ValidationError); ok {
 			switch {

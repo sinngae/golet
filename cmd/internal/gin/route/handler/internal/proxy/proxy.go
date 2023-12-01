@@ -29,3 +29,7 @@ func ReverseProxyHost(remoteUrl string) (*httputil.ReverseProxy, error) {
 		ExpectContinueTimeout: 1 * time.Second,
 	}
 }
+
+func ServeHTTP() {
+
+}

@@ -3,13 +3,13 @@ package gland
 var (
 	RetCodeSuccess int = 0
 	MsgSuccess         = "success"
-	CodeMsgSuccess     = NewRetCodeMsg(RetCodeSuccess, MsgSuccess)
+	CodeMsgSuccess     = New(RetCodeSuccess, MsgSuccess, nil)
 
 	RetCodeFailure int = 1
 	MsgFailure         = "failure"
-	CodeMsgFailure     = NewRetCodeMsg(RetCodeFailure, MsgFailure)
+	CodeMsgFailure     = New(RetCodeFailure, MsgFailure, nil)
 
 	RetCodeUnknown int = 2
 	MsgUnknown         = "unknown"
-	CodeMsgUnknown     = NewRetCodeMsg(RetCodeUnknown, MsgUnknown)
+	CodeMsgUnknown     = New(RetCodeUnknown, MsgUnknown, nil)
 )

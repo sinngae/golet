@@ -1,6 +1,8 @@
-package main
+package errcode
 
-import "github.com/sinngae/golet/src/gland"
+import (
+	"github.com/sinngae/golet/src/gland"
+)
 
 const (
 	// code 0 ~ 99
@@ -11,6 +13,7 @@ const (
 	// code 100 ~ 1999, DB error
 	RetCodeNoData = 1000
 
+	// bad request
 	// code 2000 ~ 2999, common biz error
 	//  code 2000 ~ 2099, param error
 	RetCodeNoParam          = 2000
@@ -26,19 +29,19 @@ const (
 
 var (
 	// critical
-	Success = gland.NewRetCodeMsg(RetCodeSuccess, gland.MsgSuccess)
-	Failure = gland.NewRetCodeMsg(RetCodeFailure, gland.MsgFailure)
-	Unknown = gland.NewRetCodeMsg(RetCodeUnknown, gland.MsgUnknown)
+	Success = gland.New(RetCodeSuccess, gland.MsgSuccess, nil)
+	Failure = gland.New(RetCodeFailure, gland.MsgFailure, nil)
+	Unknown = gland.New(RetCodeUnknown, gland.MsgUnknown, nil)
 
-	DBNoData = gland.NewRetCodeMsg(RetCodeNoData, "data not found")
+	DBNoData = gland.New(RetCodeNoData, "data not found", nil)
 
-	NoParam          = gland.NewRetCodeMsg(RetCodeNoParam, "required param not found")
-	ParamInvalid     = gland.NewRetCodeMsg(RetCodeParamInvalid, "param is invalid")
-	ParamParseFailed = gland.NewRetCodeMsg(RetCodeParamParseFailed, "parse param failed")
+	NoParam          = gland.New(RetCodeNoParam, "required param not found", nil)
+	ParamInvalid     = gland.New(RetCodeParamInvalid, "param is invalid", nil)
+	ParamParseFailed = gland.New(RetCodeParamParseFailed, "parse param failed", nil)
 
-	JWTNoData  = gland.NewRetCodeMsg(RetCodeJWTNoData, "JWT not found")
-	JWTInvalid = gland.NewRetCodeMsg(RetCodeJWTInvalid, "JWT is invalid")
-	JWTExpired = gland.NewRetCodeMsg(RetCodeJWTExpired, "JWT is expired")
+	JWTNoData  = gland.New(RetCodeJWTNoData, "JWT not found", nil)
+	JWTInvalid = gland.New(RetCodeJWTInvalid, "JWT is invalid", nil)
+	JWTExpired = gland.New(RetCodeJWTExpired, "JWT is expired", nil)
 
-	ConfigNoData = gland.NewRetCodeMsg(RetCodeConfigNoData, "config not found")
+	ConfigNoData = gland.New(RetCodeConfigNoData, "config not found", nil)
 )
