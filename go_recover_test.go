@@ -1,14 +1,28 @@
-package main
+package test
 
 import "fmt"
 
-func main() {
+func ExampleRecover() {
 	ss("xx", func() {
-		defer cronRecover()()
+		//defer cronRecover()()
+		defer abc()
 		fmt.Println("this is pnc")
 		panic("this")
 	})
 	fmt.Println("Hello world!")
+	// output:
+
+}
+
+func abc() {
+	recv()
+}
+
+func recv() {
+	fmt.Println("this is recv")
+	if err := recover(); err != nil {
+		fmt.Println(err, "abc def")
+	}
 }
 
 func cronRecover() func() {
