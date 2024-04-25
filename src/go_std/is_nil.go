@@ -12,7 +12,7 @@ import (
 // The expression (*[2]uintptr)(unsafe.Pointer(&s.i))[1], works, but there's no guarantee that it will work in the future.
 // The Value.Pointer method is the supported way to solve this problem. Other solutions require that you make assumptions
 // about the memory layout.
-func isNil(data interface{}) bool {
+func IsNil(data interface{}) bool {
 	return (*[2]uintptr)(unsafe.Pointer(&data))[1] == 0
 }
 

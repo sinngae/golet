@@ -9,7 +9,7 @@ import (
 
 func RecoverHandler(ctx context.Context) error {
 	if rcv := recover(); rcv != nil {
-		tNow := time.Now().Format("2006/01/02 - 15:04:05")
+		tNow := time.Now().Format(time.DateTime)
 		rcvStr := fmt.Sprintf("%+v", rcv)
 		stack := string(debug.Stack())
 		err := fmt.Errorf("panic: time=%+v, panic=%+v, stack=%s", tNow, rcvStr, stack)
