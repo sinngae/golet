@@ -1,69 +1,49 @@
 package gland
 
 import (
+	"bytes"
 	"crypto/md5"
 	"fmt"
-
-	"github.com/sinngae/golet/src/gland/internal"
+	"runtime"
 )
 
-func WithStack(err error) error {
-	if err == nil {
-		return nil
+type (
+	StackInfo struct {
+		Sum     [16]byte `json:"sum"`
+		Content []byte   `json:"content"`
 	}
+)
 
-	return &withStack{
-		cause: err,
-		stack: NewStack(),
-	}
-}
+func NewStack() *StackInfo {
+	buf := Stack()
+	sum := md5.Sum(buf)
 
-func NewStack() *internal.MyStack {
-	stack := internal.Stack()
-	sum := md5.Sum(stack)
-
-	return &internal.MyStack{
+	return &StackInfo{
 		Sum:     sum,
-		Content: stack,
+		Content: buf,
 	}
 }
 
-type withStack struct {
-	cause error
-	stack *internal.MyStack
-}
-
-func (st *withStack) Error() string {
-	return st.JsonStr()
-}
-
-func (st *withStack) JsonStr() string {
-	if st.cause == nil {
-		return fmt.Sprintf("{\"stack\":\"%s\", \"sum\":\"%x\"}", st.stack.Content, st.stack.Sum)
+func (s *StackInfo) MarshalJSON() ([]byte, error) {
+	if s == nil {
+		return []byte(``), nil
 	}
-	return fmt.Sprintf("{\"stack\":\n\"%s\", \"sum\":\"%x\", \"err\":%s}", st.stack.Content, st.stack.Sum, JsonStr(st.cause))
+	str := string(s.Content)
+	return []byte(fmt.Sprintf(`{"sum":"%x", "content":"%s"}`, string(s.Sum[:]), str)), nil
 }
 
-func (st *withStack) Stack() *internal.MyStack {
-	return st.stack
+func Stack() []byte {
+	return stack(2)
 }
 
-func (st *withStack) Cause() error {
-	return st.cause
-}
-
-func Stack(err error) *internal.MyStack {
-	if err == nil {
-		return nil
-	}
-	for err != nil {
-		stack, ok := err.(internal.Stacker)
-		if ok {
-			return stack.Stack()
+func stack(skip int) []byte {
+	buf := new(bytes.Buffer)
+	for i := skip; ; i++ {
+		pc, file, line, ok := runtime.Caller(i)
+		if !ok {
+			break
 		}
-
-		err = Cause(err)
+		_, _ = fmt.Fprintf(buf, `%s:%d (0x%x)\n`, file, line, pc)
 	}
-
-	return nil
+	return buf.Bytes()
 }
