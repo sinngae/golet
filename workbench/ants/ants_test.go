@@ -12,5 +12,5 @@ func ExampleAnts() {
 		log.Fatalf("new pool fail, err=%s", err)
 	}
 
-	pool.Tune()
+	pool.Tune(1)
 }

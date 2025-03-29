@@ -38,7 +38,7 @@ Session.vim
 
 # go project structure
 vendor
-bin
+/bin/
 
 # ignore any log
 log
@@ -46,3 +46,4 @@ log
 # config
 conf
 
+go.sum

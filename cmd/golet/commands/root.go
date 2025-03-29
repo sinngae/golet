@@ -17,9 +17,14 @@ var (
 
 	// cmdRoot
 	cmdRoot = &cobra.Command{
-		Use:   "golet",
-		Short: "golet is a tool for Dev daily work",
-		Long:  `golet is a tool for developer daily work.`,
+		Use:   "servlet",
+		Short: "servlet is a tool for testing server framework",
+		Long:  `servlet is a tool for testing server framework.`,
+		//========
+		//		Use:   "golet",
+		//		Short: "golet is a tool for Dev daily work",
+		//		Long:  `golet is a tool for developer daily work.`,
+		//>>>>>>>> 4aad3e1b64427d5ebafb07f037b140f7eb3a6511:sample/cmdcli/golet/internal/root.go
 		PersistentPreRun: func(cmd *cobra.Command, args []string) {
 			ctxCom = context.WithValue(context.Background(), "host", "zqren-test")
 			ctxCom = context.WithValue(ctxCom, "user-agent", "")

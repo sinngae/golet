@@ -1,17 +1,13 @@
-<<<<<<< HEAD
-package assert
-
-import "reflect"
-
-func Equal(src, dst interface{}) {
-	srcType := reflect.TypeOf(src)
-	dstType := reflect.TypeOf(dst)
-	if srcType != dstType {
-		panic("type not equal")
-	}
-
-}
-=======
+// import "reflect"
+//
+//	func Equal(src, dst interface{}) {
+//		srcType := reflect.TypeOf(src)
+//		dstType := reflect.TypeOf(dst)
+//		if srcType != dstType {
+//			panic("type not equal")
+//		}
+//
+// }
 package assert
 
 import (
@@ -192,4 +188,3 @@ func truncatingFormat(data interface{}) string {
 	}
 	return value
 }
->>>>>>> 4aad3e1b64427d5ebafb07f037b140f7eb3a6511

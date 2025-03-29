@@ -22,9 +22,8 @@ func TestEqual(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, got1 := Equal(tt.expected, tt.actual)
+			got := assert.Equal(t, tt.expected, tt.actual)
 			assert.NotEqual(t, tt.want, got)
-			assert.NotEqual(t, tt.want1, got1)
 		})
 	}
 }

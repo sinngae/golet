@@ -7,6 +7,8 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+
+	"github.com/sinngae/golet/src/errcode"
 )
 
 // formDataCheck 文件类型检测 + 文件大小检测
@@ -37,7 +39,7 @@ func formDataCheck(ctx context.Context, w http.ResponseWriter, r *http.Request) 
 	fileBody, ok := files[formKeyFile]
 	if !ok || fileBody == nil {
 		err := fmt.Errorf("form-part[%s] file is expected", formKeyFile)
-		//err = bak.Gland(err, errcode.XlsBadRequest)
+		err = errcode.Unknown.WithCause(err)
 		return nil, nil, err
 	}
 	fileBuf := bytes.NewBuffer(fileBody)
@@ -51,7 +53,7 @@ func formDataCheck(ctx context.Context, w http.ResponseWriter, r *http.Request) 
 	err = json.Unmarshal(textBody, pbReq)
 	if err != nil {
 		err = fmt.Errorf("parse data[%v] failed, err=%v", textBody, err)
-		//err = bak.Gland(err, errcode.XlsBadRequest)
+		err = bak.Gland(err, errcode.XlsBadRequest)
 		return nil, nil, err
 	}
 
@@ -63,7 +65,7 @@ func ParseForm(w http.ResponseWriter, r *http.Request, bodyMaxLimit, fileSumMaxL
 	reader, err := r.MultipartReader()
 	if err != nil { // http.StatusBadRequest
 		err = fmt.Errorf("read form-multipart failed, err=%v", err)
-		//err = bak.Gland(err, errcode.XlsBadRequest)
+		err = bak.Gland(err, errcode.XlsBadRequest)
 		return nil, nil, err
 	}
 
@@ -85,7 +87,8 @@ func ParseForm(w http.ResponseWriter, r *http.Request, bodyMaxLimit, fileSumMaxL
 		}
 		if err != nil {
 			err = fmt.Errorf("read form-part failed, err=%v", err)
-			//err = bak.Gland(err, errcode.XlsBadRequest)
+			err = stack.New()
+			err = bak.Gland(err, errcode.XlsBadRequest)
 			return nil, nil, err
 		}
 
@@ -95,21 +98,21 @@ func ParseForm(w http.ResponseWriter, r *http.Request, bodyMaxLimit, fileSumMaxL
 		if filename == "" { // 非文件字段
 			if _, ok := texts[formKey]; ok {
 				err := fmt.Errorf("form-part[%s] text is duplicated", formKey)
-				//err = bak.Gland(err, errcode.XlsBadRequest)
+				err = bak.Gland(err, errcode.XlsBadRequest)
 				return nil, nil, err
 			}
 
 			n, err := io.CopyN(&buf, part, textsMaxLimit+1)
 			if err != nil && err != io.EOF {
 				err = fmt.Errorf("read form-part[%s] text failed, err=%v", formKey, err)
-				//err = bak.Gland(err, errcode.XlsBadRequest)
+				err = bak.Gland(err, errcode.XlsBadRequest)
 				return nil, nil, err
 			}
 
 			textsMaxLimit -= n
 			if textsMaxLimit < 0 {
 				err := fmt.Errorf("form-part[%s] text too large", formKey)
-				//err = bak.Gland(err, errcode.XlsSizeMaxExceed) // XXX ?
+				err = bak.Gland(err, errcode.XlsSizeMaxExceed) // XXX ?
 				return nil, nil, err
 			}
 
@@ -117,21 +120,21 @@ func ParseForm(w http.ResponseWriter, r *http.Request, bodyMaxLimit, fileSumMaxL
 		} else { // 文件字段
 			if _, ok := files[formKey]; ok {
 				err := fmt.Errorf("form-part[%s] file is duplicated", formKey)
-				//err = bak.Gland(err, errcode.XlsBadRequest)
+				err = bak.Gland(err, errcode.XlsBadRequest)
 				return nil, nil, err
 			}
 
 			n, err := io.CopyN(&buf, part, filesMaxLimit+1)
 			if err != nil && err != io.EOF {
 				err = fmt.Errorf("read form-part[%s] file failed, err=%v", formKey, err)
-				//err = bak.Gland(err, errcode.XlsSizeMaxExceed) // XXX always be
+				err = bak.Gland(err, errcode.XlsSizeMaxExceed) // XXX always be
 				return nil, nil, err
 			}
 
 			filesMaxLimit -= n
 			if filesMaxLimit < 0 {
 				err := fmt.Errorf("form-part[%s] file too large", formKey)
-				//err = bak.Gland(err, errcode.XlsSizeMaxExceed) // XXX ?
+				err = bak.Gland(err, errcode.XlsSizeMaxExceed) // XXX ?
 				return nil, nil, err
 			}
 
@@ -139,7 +142,7 @@ func ParseForm(w http.ResponseWriter, r *http.Request, bodyMaxLimit, fileSumMaxL
 			contentType := http.DetectContentType(files[formKey])
 			if contentType != constHttp.ContentTypeZip {
 				err := fmt.Errorf("form-part[%s] file type is not allowed", formKey)
-				//err = bak.Gland(err, errcode.XlsBadRequest)
+				err = bak.Gland(err, errcode.XlsBadRequest)
 				return nil, nil, err
 			}
 		}
